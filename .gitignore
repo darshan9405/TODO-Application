@@ -1,0 +1,18 @@
+# IDE files
+.idea/
+.netbeans/
+*.iml
+
+# Build artifacts
+target/
+*.jar
+*.war
+*.egg
+
+# Generated files
+*.class
+*.log
+
+# Other ignored files
+.DS_Store
+Thumbs.db
