@@ -8,8 +8,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -39,9 +37,4 @@ public class Task {
     @JsonProperty("status")
     @Column(name = "status")
     private String status;
-
-    @JsonProperty("userId")
-    @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "userName")
-    private User userId;
 }
