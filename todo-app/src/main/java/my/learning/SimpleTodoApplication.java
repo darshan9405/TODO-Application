@@ -6,10 +6,12 @@ import io.dropwizard.core.setup.Environment;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import my.learning.core.Task;
+import my.learning.db.TaskDAO;
+import my.learning.resources.TaskResource;
 
 public class SimpleTodoApplication extends Application<SimpleTodoConfiguration> {
 
-    private final HibernateBundle<SimpleTodoConfiguration> hibernate = new HibernateBundle<SimpleTodoConfiguration>(
+    private final HibernateBundle<SimpleTodoConfiguration> hibernateBundle = new HibernateBundle<SimpleTodoConfiguration>(
             Task.class) {
         @Override
         public DataSourceFactory getDataSourceFactory(SimpleTodoConfiguration configuration) {
@@ -29,13 +31,15 @@ public class SimpleTodoApplication extends Application<SimpleTodoConfiguration> 
     @Override
     public void initialize(final Bootstrap<SimpleTodoConfiguration> bootstrap) {
         // TODO: application initialization
-        bootstrap.addBundle(hibernate);
+        bootstrap.addBundle(hibernateBundle);
     }
 
     @Override
     public void run(final SimpleTodoConfiguration configuration,
             final Environment environment) {
         // TODO: implement application
+        final TaskDAO taskDAO = new TaskDAO(hibernateBundle.getSessionFactory());
+        environment.jersey().register(new TaskResource(taskDAO));
     }
 
 }
