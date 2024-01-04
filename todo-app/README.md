@@ -14,7 +14,7 @@ To see your applications health enter url `http://localhost:8081/healthcheck`
 
 Create a config.yml file containing the configurations:
 
----
+```yaml
 logging:
   level: INFO
   loggers:
@@ -28,3 +28,4 @@ database:
   properties:
     hibernate.dialect: org.hibernate.dialect.MySQLDialect
     hibernate.hbm2ddl.auto: update
+```
