@@ -20,11 +20,13 @@ import jakarta.persistence.TemporalType;
 @Table(name = "Task")
 @NamedQueries({
         @NamedQuery(name = "my.learning.core.Task.getAllTasks", query = "SELECT T FROM Task T" +
-                " where T.status = :status")
+                " where T.status = :status"),
+        @NamedQuery(name = "my.learning.core.Task.deleteById", query = "DELETE FROM Task T" + " WHERE T.id = :id")
 })
 
 public class Task {
     @Id
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -52,5 +54,45 @@ public class Task {
 
     public long getTaskId() {
         return id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

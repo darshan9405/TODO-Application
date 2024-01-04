@@ -5,10 +5,13 @@ import java.util.List;
 import com.codahale.metrics.annotation.Timed;
 
 import io.dropwizard.hibernate.UnitOfWork;
+import io.dropwizard.jersey.PATCH;
 import jakarta.validation.Valid;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import my.learning.core.Task;
@@ -45,5 +48,31 @@ public class TaskResource {
     @UnitOfWork
     public String createTask(@Valid Task t) {
         return taskDAO.createTask(t);
+    }
+
+    @Path("/delete/{id}")
+    @DELETE
+    @Timed
+    @UnitOfWork
+    public String deleteTask(@PathParam("id") long id) {
+        return taskDAO.deleteById(id);
+    }
+
+    @Path("/{id}")
+    @GET
+    @Timed
+    @UnitOfWork
+    public Task getById(@PathParam("id") long id) {
+        return taskDAO.getById(id);
+    }
+
+    @Path("/modify")
+    @PATCH
+    @Timed
+    @UnitOfWork
+    public void modifyTask(@Valid Task t) {
+        if (t.getTaskId() != 0) {
+            taskDAO.modifyTask(t);
+        }
     }
 }
