@@ -1,0 +1,18 @@
+services:
+    app:
+        build:
+          context: .
+          dockerfile: ./todo-app/Dockerfile
+        ports:
+            - "8080:8080"
+        depends_on:
+          -  database
+    database:
+        image: mysql:8.0
+        volumes:
+            - todo-mysql-data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: YOUR_PASSWORD
+            MYSQL_DATABASE: YOUR_DATABASE_NAME
+volumes: 
+  todo-mysql-data:
