@@ -24,7 +24,7 @@ database:
   driverClass: com.mysql.cj.jdbc.Driver
   user: YOUR_USER_NAME
   password: YOUR_PASSWORD
-  url: "jdbc:mysql://localhost:3306/DATABASE_NAME?useSSL=false&allowPublicKeyRetrieval=true"
+  url: "jdbc:mysql:// DATABASE_SERVICE/DATABASE_NAME?useSSL=false&allowPublicKeyRetrieval=true"
   properties:
     hibernate.dialect: org.hibernate.dialect.MySQLDialect
     hibernate.hbm2ddl.auto: update
