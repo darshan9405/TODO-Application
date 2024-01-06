@@ -11,8 +11,8 @@ import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import my.learning.core.Task;
 import my.learning.db.TaskDAO;
@@ -26,23 +26,21 @@ public class TaskResource {
         this.taskDAO = taskDAO;
     }
 
-    @Path("/todo")
+    @Path("/")
     @GET
     @Timed
     @UnitOfWork
-    public List<Task> getAllTodoTasks() {
-        return taskDAO.getAllTasks("TODO");
+    public List<Task> getTask(@QueryParam("status") String status, @QueryParam("id") Long id) {
+        if (status == null) {
+            if (id == null) {
+                return taskDAO.getAllTasks();
+            }
+            return List.of(taskDAO.getById(id));
+        }
+        return taskDAO.getAllTasksByStatus(status);
     }
 
-    @Path("/wip")
-    @GET
-    @Timed
-    @UnitOfWork
-    public List<Task> getAllWIPTasks() {
-        return taskDAO.getAllTasks("WIP");
-    }
-
-    @Path("/create")
+    @Path("/")
     @POST
     @Timed
     @UnitOfWork
@@ -50,23 +48,15 @@ public class TaskResource {
         return taskDAO.createTask(t);
     }
 
-    @Path("/delete/{id}")
+    @Path("/")
     @DELETE
     @Timed
     @UnitOfWork
-    public String deleteTask(@PathParam("id") long id) {
+    public String deleteTask(@QueryParam("id") long id) {
         return taskDAO.deleteById(id);
     }
 
-    @Path("/{id}")
-    @GET
-    @Timed
-    @UnitOfWork
-    public Task getById(@PathParam("id") long id) {
-        return taskDAO.getById(id);
-    }
-
-    @Path("/modify")
+    @Path("/")
     @PATCH
     @Timed
     @UnitOfWork

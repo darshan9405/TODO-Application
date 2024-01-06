@@ -13,8 +13,12 @@ public class TaskDAO extends AbstractDAO<Task> {
         // TODO Auto-generated constructor stub
     }
 
-    public List<Task> getAllTasks(String status) {
-        return list(namedTypedQuery("my.learning.core.Task.getAllTasks").setParameter("status", status));
+    public List<Task> getAllTasksByStatus(String status) {
+        return list(namedTypedQuery("my.learning.core.Task.getAllTasksByStatus").setParameter("status", status));
+    }
+
+    public List<Task> getAllTasks() {
+        return list(namedTypedQuery("my.learning.core.Task.getAllTasks"));
     }
 
     public String createTask(Task t) {

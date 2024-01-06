@@ -8,30 +8,37 @@ The Todo Application is built on the Dropwizard framework, employing a MySQL dat
 
 ## API Reference
 
+#### Get all tasks
+
+```http
+  GET /tasks
+```
+
 #### Get all tasks with status todo
 
 ```http
-  GET /tasks/todo
+  GET /tasks?status=todo
 ```
+
 #### Get all tasks with status work in progress
 
 ```http
-  GET /tasks/wip
+  GET /tasks?status=wip
 ```
 
 #### Get task with particular id
 
 ```http
-  GET /tasks/${id}
+  GET /tasks?id=
 ```
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of the task          |
+| Parameter | Description                       |
+| :-------- | :-------------------------------- |
+| `id`      | **Required**. Id of the task          |
 
 #### Create new a task
 
 ```http
-  POST /tasks/create/
+  POST /tasks
 ```
 
 | Field         | Type     | Description                         |
@@ -45,18 +52,18 @@ The Todo Application is built on the Dropwizard framework, employing a MySQL dat
 #### Delete task with particular id
 
 ```http
-  DELETE /tasks/delete/${id}
+  DELETE /tasks?id=
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of task to delete |
+| Parameter | Description                       |
+| :-------- | :-------------------------------- |
+| `id`      | **Required**. Id of task to delete |
 
 
 #### Modify a task
 
 ```http
-  PATCH /tasks/modify/
+  PATCH /tasks
 ```
 
 | Field         | Type     | Description                         |

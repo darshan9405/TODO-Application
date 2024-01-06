@@ -19,8 +19,9 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Table(name = "Task")
 @NamedQueries({
-        @NamedQuery(name = "my.learning.core.Task.getAllTasks", query = "SELECT T FROM Task T" +
+        @NamedQuery(name = "my.learning.core.Task.getAllTasksByStatus", query = "SELECT T FROM Task T" +
                 " where T.status = :status"),
+        @NamedQuery(name = "my.learning.core.Task.getAllTasks", query = "SELECT T FROM Task T"),
         @NamedQuery(name = "my.learning.core.Task.deleteById", query = "DELETE FROM Task T" + " WHERE T.id = :id")
 })
 
